@@ -166,9 +166,9 @@ kbd {
 }
 
 .nav-logo {
-    width: 20px;
-    height: 20px;
-    border-radius: 4px;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
 }
 
 .logo-text {
@@ -362,8 +362,8 @@ kbd {
 }
 
 .popover-logo {
-    width: 16px;
-    height: 16px;
+    width: 22px;
+    height: 22px;
     border-radius: 4px;
 }
 
@@ -748,10 +748,10 @@ kbd {
 }
 
 .mini-app-icon {
-    width: 10px;
-    height: 10px;
+    width: 14px;
+    height: 14px;
     vertical-align: middle;
-    margin-right: 3px;
+    margin-right: 4px;
     border-radius: 2px;
 }
 
