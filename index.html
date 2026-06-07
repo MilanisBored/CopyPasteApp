@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>CopyPaste — Clipboard Management, Perfected for macOS</title>
+    <meta name="description" content="A minimal, lightning-fast macOS clipboard manager designed to blend seamlessly into your workflow. Auto-paste, smart previews, and secure local storage.">
+    <meta name="keywords" content="clipboard manager, macos clipboard, clipboard history, copypaste, productivity tool, copy paste history">
+    <meta name="author" content="CopyPaste App">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="CopyPaste — Clipboard Management, Perfected">
+    <meta property="og:description" content="A minimal, lightning-fast macOS clipboard manager designed to blend seamlessly into your workflow. Auto-paste, smart previews, and secure local storage.">
+    <meta property="og:image" content="assets/logo.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="CopyPaste — Clipboard Management, Perfected">
+    <meta property="twitter:description" content="A minimal, clipboard history tool that pastes automatically on press. Modern UI, Hex color detection, link parsing, offline storage.">
+    <meta property="twitter:image" content="assets/logo.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons (Lucide) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Sticky Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="#" class="logo-area">
+                <img src="assets/logo.png" alt="CopyPaste Logo" class="nav-logo" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'%233b82f6\'><path d=\'M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2\'/><rect x=\'8\' y=\'2\' width=\'8\' height=\'4\' rx=\'1\' ry=\'1\'/></svg>'">
+                <span class="logo-text">CopyPaste</span>
+            </a>
+            <nav class="nav-menu">
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#demo" class="nav-link">Live Demo</a>
+                <a href="#download" class="nav-link">Download</a>
+            </nav>
+            <div class="header-cta">
+                <a href="#download" class="btn btn-secondary">Get App</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-bg-gradients">
+            <div class="gradient gradient-1"></div>
+            <div class="gradient gradient-2"></div>
+        </div>
+        
+        <div class="container hero-container">
+            <div class="hero-text-content">
+                <div class="badge">macOS App</div>
+                <h1 class="hero-title">Clipboard Management, <br><span class="gradient-text">Perfected.</span></h1>
+                <p class="hero-subtitle">
+                    A minimal, lightning-fast clipboard history manager that stays out of your way and accelerates your workflow. Press shortcut, click an item, and it auto-pastes instantly.
+                </p>
+                <div class="hero-cta-buttons">
+                    <a href="#download" class="btn btn-primary">
+                        <i data-lucide="download"></i>
+                        <span>Download for macOS</span>
+                    </a>
+                    <a href="#demo" class="btn btn-secondary">
+                        <i data-lucide="play"></i>
+                        <span>Try Simulator</span>
+                    </a>
+                </div>
+                <div class="hero-meta">
+                    <span><i data-lucide="check"></i> 100% Free & Open Source</span>
+                    <span><i data-lucide="shield"></i> Local storage (Offline)</span>
+                </div>
+            </div>
+            
+            <!-- Interactive Simulator Mockup -->
+            <div class="hero-mockup-container">
+                <div class="simulator-wrapper">
+                    <!-- Glow decoration -->
+                    <div class="simulator-glow"></div>
+                    
+                    <!-- macOS Window Mockup of the CopyPaste App -->
+                    <div class="app-panel" id="appPanel">
+                        
+                        <!-- List Screen -->
+                        <div class="panel-screen" id="listScreen">
+                            <!-- Header -->
+                            <div class="panel-header">
+                                <div class="header-left">
+                                    <img src="assets/logo.png" alt="CopyPaste Logo" class="app-header-logo" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'%233b82f6\'><path d=\'M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2\'/><rect x=\'8\' y=\'2\' width=\'8\' height=\'4\' rx=\'1\' ry=\'1\'/></svg>'">
+                                    <span class="app-header-title">CopyPaste</span>
+                                </div>
+                                <div class="header-right">
+                                    <span class="app-limit-badge" id="limitLabel">5/20</span>
+                                    <button class="app-icon-btn" id="pinBtn" title="Pin Panel">
+                                        <i data-lucide="pin" class="lucide-sm"></i>
+                                    </button>
+                                    <button class="app-icon-btn" id="settingsBtn" title="Settings">
+                                        <i data-lucide="settings" class="lucide-sm"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Search Bar -->
+                            <div class="panel-search-container">
+                                <div class="search-input-wrapper">
+                                    <i data-lucide="search" class="search-icon"></i>
+                                    <input type="text" id="searchInput" placeholder="Search history..." autocomplete="off">
+                                    <button id="searchClearBtn" class="search-clear-btn" style="display: none;">
+                                        <i data-lucide="x-circle"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Divider -->
+                            <div class="panel-divider"></div>
+                            
+                            <!-- History List -->
+                            <div class="panel-list" id="panelList">
+                                <!-- JavaScript will populate this or fallback to initial template -->
+                            </div>
+                            
+                            <!-- Divider -->
+                            <div class="panel-divider"></div>
+                            
+                            <!-- Footer -->
+                            <div class="panel-footer">
+                                <div class="footer-left">
+                                    <button class="footer-btn text-danger" id="clearBtn">
+                                        <i data-lucide="trash-2"></i>
+                                        <span>Clear</span>
+                                    </button>
+                                    <div class="clear-confirm-wrapper" id="clearConfirmWrapper" style="display: none;">
+                                        <button class="footer-btn text-danger font-bold" id="confirmClearBtn">Confirm</button>
+                                        <button class="footer-btn text-secondary" id="cancelClearBtn">Cancel</button>
+                                    </div>
+                                </div>
+                                <div class="footer-right">
+                                    <button class="footer-btn text-secondary" id="quitBtn">
+                                        <span>Quit</span>
+                                        <i data-lucide="power"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Settings Screen (Initially Hidden) -->
+                        <div class="panel-screen" id="settingsScreen" style="display: none;">
+                            <!-- Settings Header -->
+                            <div class="panel-header">
+                                <button class="back-btn" id="settingsBackBtn">
+                                    <i data-lucide="chevron-left"></i>
+                                    <span>Back</span>
+                                </button>
+                                <span class="app-header-title">Settings</span>
+                                <div style="width: 44px;"></div> <!-- Spacer -->
+                            </div>
+                            
+                            <div class="panel-divider"></div>
+                            
+                            <!-- Settings Scrollable Content -->
+                            <div class="settings-content">
+                                <!-- Global Shortcut -->
+                                <div class="setting-section">
+                                    <label class="setting-section-title">GLOBAL KEYBOARD SHORTCUT</label>
+                                    <div class="setting-card">
+                                        <p class="setting-card-desc">Press this combo from anywhere to toggle the manager:</p>
+                                        <select class="settings-picker" id="shortcutPicker">
+                                            <option value="cmd_shift_v">⌘ ⇧ V (Cmd + Shift + V)</option>
+                                            <option value="cmd_opt_c" selected>⌘ ⌥ C (Cmd + Option + C)</option>
+                                            <option value="ctrl_alt_c">⌃ ⌥ C (Ctrl + Option + C)</option>
+                                            <option value="cmd_shift_c">⌘ ⇧ C (Cmd + Shift + C)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <!-- History Storage Limit -->
+                                <div class="setting-section">
+                                    <label class="setting-section-title">HISTORY STORAGE LIMIT</label>
+                                    <div class="setting-card">
+                                        <p class="setting-card-desc">Maximum number of clipboard items to store locally:</p>
+                                        <select class="settings-picker" id="limitPicker">
+                                            <option value="10">10 items</option>
+                                            <option value="15">15 items</option>
+                                            <option value="20" selected>20 items</option>
+                                            <option value="30">30 items</option>
+                                            <option value="50">50 items</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <!-- Accessibility Permission -->
+                                <div class="setting-section">
+                                    <label class="setting-section-title">SYSTEM ACCESSIBILITY PERMISSION</label>
+                                    <div class="setting-card">
+                                        <div class="permission-status">
+                                            <div class="status-indicator success"></div>
+                                            <span class="status-text font-semibold">Permission: Granted</span>
+                                        </div>
+                                        <p class="setting-card-desc margin-top-sm">
+                                            Auto-paste requires Accessibility permission to simulate the Cmd+V keystroke.
+                                        </p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Security & Data -->
+                                <div class="setting-section">
+                                    <label class="setting-section-title">SECURITY & DATA</label>
+                                    <div class="setting-card">
+                                        <div class="info-row">
+                                            <span>Version</span>
+                                            <span class="text-secondary font-semibold">1.0.0</span>
+                                        </div>
+                                        <div class="info-divider"></div>
+                                        <p class="setting-card-desc font-xs opacity-80">
+                                            All history is stored securely in your system's Local UserDefaults and never leaves your computer.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="panel-divider"></div>
+                            
+                            <!-- Settings Footer -->
+                            <div class="settings-footer">
+                                <span>CopyPaste Settings</span>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="badge">Core Strengths</div>
+                <h2 class="section-title">Built for Speed and Security</h2>
+                <p class="section-subtitle">No bloated plugins, no cloud syncing, no subscription fees. Just pure clipboard utility at your command.</p>
+            </div>
+            
+            <div class="features-grid">
+                <!-- Feature 1 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="zap"></i>
+                    </div>
+                    <h3 class="feature-title">Instant Hotkey Access</h3>
+                    <p class="feature-text">
+                        Press your customizable global hotkey (default: <kbd>⌘⌥C</kbd>) from anywhere, and the history panel flies out right at your cursor position instantly.
+                    </p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="arrow-down-to-line"></i>
+                    </div>
+                    <h3 class="feature-title">Smart Auto-Paste</h3>
+                    <p class="feature-text">
+                        Stop manually pressing paste. Simply select your snippet from the list, click or hit <kbd>Enter</kbd>, and the app automatically focus-recovers and pastes it.
+                    </p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="palette"></i>
+                    </div>
+                    <h3 class="feature-title">Intuitive Smart Previews</h3>
+                    <p class="feature-text">
+                        Intelligently distinguishes and formats items: previews Hex color codes with color swatches, displays shortened URL domain badges, renders image clippings, and formats raw code snippets.
+                    </p>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="shield-alert"></i>
+                    </div>
+                    <h3 class="feature-title">100% Offline & Private</h3>
+                    <p class="feature-text">
+                        Your data stays yours. All clipboard items are stored locally inside the system's sandbox via UserDefaults. There is no cloud storage, analytics tracking, or internet connection required.
+                    </p>
+                </div>
+                
+                <!-- Feature 5 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="keyboard"></i>
+                    </div>
+                    <h3 class="feature-title">Keyboard Navigation Native</h3>
+                    <p class="feature-text">
+                        Designed with heavy keyboard users in mind. Navigate through logs using <kbd>↑</kbd> and <kbd>↓</kbd> arrows, press <kbd>Enter</kbd> to copy/paste, and dismiss instantly using <kbd>Esc</kbd>.
+                    </p>
+                </div>
+                
+                <!-- Feature 6 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i data-lucide="sliders-horizontal"></i>
+                    </div>
+                    <h3 class="feature-title">Ultra Lightweight</h3>
+                    <p class="feature-text">
+                        Written in native Swift using SwiftUI and Carbon APIs. Consumes negligible CPU cycles and memory. Tailor storage limits (up to 50 items) to prevent disk inflation.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Simulator Demo Callout Section -->
+    <section id="demo" class="demo-section">
+        <div class="container demo-grid">
+            <div class="demo-info">
+                <div class="badge">Interactive Playground</div>
+                <h2 class="section-title">Try CopyPaste right in your browser</h2>
+                <p class="section-subtitle">
+                    Interact with the simulated Mac application mockup to test features before you download. 
+                </p>
+                <ul class="demo-list">
+                    <li><i data-lucide="mouse-pointer-click"></i> <strong>Click any item:</strong> It copies the data and updates the simulated output clipboard.</li>
+                    <li><i data-lucide="search"></i> <strong>Type in search:</strong> Instantly filter items by keyword. Try typing <code>color</code> or <code>http</code>.</li>
+                    <li><i data-lucide="settings"></i> <strong>Gear button:</strong> Switch into the Settings view to toggle limits and view configurations.</li>
+                </ul>
+                <div class="output-clipboard-box">
+                    <div class="output-header">
+                        <span>Simulated OS Clipboard Status</span>
+                        <div class="clipboard-light animate-pulse" id="clipLight"></div>
+                    </div>
+                    <div class="output-content">
+                        <code id="clipboardOutput">Empty. Try clicking an item in the app simulator above!</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <div class="badge">Workflow</div>
+                <h2 class="section-title">A Seamless Three-Step Loop</h2>
+                <p class="section-subtitle">Integrate clipboard automation without interrupting your coding flow.</p>
+            </div>
+            
+            <div class="steps-container">
+                <div class="step-item">
+                    <div class="step-num">1</div>
+                    <h3 class="step-title">Copy Freely</h3>
+                    <p class="step-text">Use your standard Command+C shortcuts across websites, documents, or image editors. CopyPaste automatically records it in the background.</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">2</div>
+                    <h3 class="step-title">Trigger Panel</h3>
+                    <p class="step-text">Press <kbd>⌘⌥C</kbd>. The panel slides out directly next to your cursor, meaning you never have to scan across your wide screen monitor.</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">3</div>
+                    <h3 class="step-title">Press Enter</h3>
+                    <p class="step-text">Use arrow keys to highlight any snippet, and hit Enter. The application closes, refocuses your text editor, and pastes the code instantly.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="download" class="download-section">
+        <div class="container">
+            <div class="download-card">
+                <div class="download-card-glow"></div>
+                <h2 class="download-title">Improve Your Clipboard Workflow</h2>
+                <p class="download-text">CopyPaste is native, completely offline, lightweight, and open source. Give your developer workflow the boost it needs.</p>
+                
+                <div class="download-btn-group">
+                    <a href="https://github.com/Milanchetry21/CopyPaste/releases/latest" class="btn btn-primary btn-lg">
+                        <i data-lucide="download"></i>
+                        <span>Download for macOS</span>
+                    </a>
+                    <a href="https://github.com/Milanchetry21/CopyPaste" class="btn btn-secondary btn-lg">
+                        <i data-lucide="github"></i>
+                        <span>View Source on GitHub</span>
+                    </a>
+                </div>
+                
+                <div class="system-req">
+                    <span>Compatible with macOS 11.0 Big Sur or newer. Apple Silicon & Intel support.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-left-info">
+                <div class="footer-logo">
+                    <img src="assets/logo.png" alt="CopyPaste Logo" class="footer-logo-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'%233b82f6\'><path d=\'M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2\'/><rect x=\'8\' y=\'2\' width=\'8\' height=\'4\' rx=\'1\' ry=\'1\'/></svg>'">
+                    <span class="footer-logo-text">CopyPaste</span>
+                </div>
+                <p class="footer-tagline">Clipboard history utility, crafted meticulously for macOS developers.</p>
+            </div>
+            
+            <div class="footer-nav">
+                <div class="footer-column">
+                    <h4>Product</h4>
+                    <a href="#features">Features</a>
+                    <a href="#demo">Live Demo</a>
+                    <a href="https://github.com/Milanchetry21/CopyPaste/releases">Releases</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Legal</h4>
+                    <span class="footer-no-link">Privacy Focused</span>
+                    <span class="footer-no-link">100% Local Storage</span>
+                    <span class="footer-no-link">MIT License</span>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container footer-bottom-container">
+                <p class="copyright">&copy; 2026 CopyPaste App. All rights reserved. Created with care.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom Script -->
+    <script src="app.js"></script>
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>
