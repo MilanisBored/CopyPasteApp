@@ -52,6 +52,11 @@
     <!-- Hero Section -->
     <section class="hero-section">
         <div class="container hero-container">
+            <div class="hero-keycaps" id="hero-keycaps">
+                <div class="keycap keycap-1" id="kc-1"><span class="key-top">⌘</span></div>
+                <div class="keycap keycap-2" id="kc-2"><span class="key-top">⌥</span></div>
+                <div class="keycap keycap-3" id="kc-3"><span class="key-top">V</span></div>
+            </div>
             <h1 class="hero-title">Copy. Paste. Done.</h1>
             <p class="hero-subtitle">
                 A native macOS clipboard utility designed to stay out of your way and run at the speed of thought. 
@@ -373,6 +378,74 @@
     <!-- Script to initialize Lucide Icons -->
     <script>
         lucide.createIcons();
+    </script>
+
+    <!-- Dynamic Keycaps Shortcut Cycling Script -->
+    <script>
+        const shortcuts = [
+            { keys: ["⌘", "⌥", "V"] },
+            { keys: ["⌘", "⇧", "V"] },
+            { keys: ["⌘", "⇧", "C"] },
+            { keys: ["⌥", "V", ""] },
+            { keys: ["⌥", "Space", ""] },
+            { keys: ["⌃", "⌥", "V"] }
+        ];
+
+        let currentShortcutIdx = 0;
+        const kc1 = document.getElementById("kc-1");
+        const kc2 = document.getElementById("kc-2");
+        const kc3 = document.getElementById("kc-3");
+        const kContainer = document.getElementById("hero-keycaps");
+
+        function updateKeycapState(element, keyText) {
+            const topElement = element.querySelector(".key-top");
+            topElement.textContent = keyText;
+
+            // Handle space key spacing/size
+            if (keyText === "Space") {
+                element.classList.add("keycap-space");
+            } else {
+                element.classList.remove("keycap-space");
+            }
+
+            // Reduce font size if label is text-only or more than one character
+            if (keyText.length > 1) {
+                element.classList.add("keycap-text-only");
+            } else {
+                element.classList.remove("keycap-text-only");
+            }
+        }
+
+        function updateKeycaps() {
+            // 1. Fade out current shortcut text
+            kContainer.classList.add("key-swifting");
+
+            // 2. Wait for fade-out transition, then update content and layout
+            setTimeout(() => {
+                currentShortcutIdx = (currentShortcutIdx + 1) % shortcuts.length;
+                const nextShortcut = shortcuts[currentShortcutIdx];
+
+                // Update key values & classes
+                updateKeycapState(kc1, nextShortcut.keys[0]);
+                updateKeycapState(kc2, nextShortcut.keys[1]);
+
+                if (nextShortcut.keys[2]) {
+                    updateKeycapState(kc3, nextShortcut.keys[2]);
+                    kc3.classList.remove("keycap-hidden");
+                } else {
+                    kc3.classList.add("keycap-hidden");
+                }
+
+                // 3. Fade content back in
+                kContainer.classList.remove("key-swifting");
+            }, 250);
+        }
+
+        // Align JS trigger with the CSS animation loop (at 2.6 seconds of every 4s loop)
+        setTimeout(() => {
+            updateKeycaps();
+            setInterval(updateKeycaps, 4000);
+        }, 2600);
     </script>
 </body>
 </html>

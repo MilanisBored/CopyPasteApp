@@ -226,8 +226,8 @@ kbd {
    HERO SECTION
    ========================================================================== */
 .hero-section {
-    padding-top: calc(var(--header-height) + 120px);
-    padding-bottom: 128px;
+    padding-top: calc(var(--header-height) + 54px);
+    padding-bottom: 64px;
     text-align: center;
     background-color: var(--color-bg-canvas);
 }
@@ -238,6 +238,193 @@ kbd {
     align-items: center;
 }
 
+/* Hero Keycaps Layout */
+.hero-keycaps {
+    --keycap-size: 68px;
+    --keycap-shadow-up: 6px;
+    --keycap-shadow-down: 2px;
+    --keycap-shadow-active: 0px;
+    --keycap-translate-down: 4px;
+    --keycap-translate-active: 6px;
+    --keycap-font-size: 1.55rem;
+    --keycap-border-radius: 12px;
+    --keycap-gap: 16px;
+    --keycap-margin-bottom: 24px;
+
+    display: flex;
+    gap: var(--keycap-gap);
+    perspective: 1000px;
+    margin-bottom: var(--keycap-margin-bottom);
+    transition: opacity 0.25s ease;
+}
+
+.hero-keycaps .keycap {
+    width: var(--keycap-size);
+    height: var(--keycap-size);
+    background: var(--color-bg-white);
+    border: 1px solid var(--color-border-mid);
+    border-radius: var(--keycap-border-radius);
+    box-shadow: 0 var(--keycap-shadow-up) 0 var(--color-border-mid), 0 12px 20px rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    user-select: none;
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.15s cubic-bezier(0.25, 1, 0.5, 1),
+                box-shadow 0.15s cubic-bezier(0.25, 1, 0.5, 1),
+                width 0.35s cubic-bezier(0.25, 1, 0.5, 1),
+                margin 0.35s cubic-bezier(0.25, 1, 0.5, 1),
+                opacity 0.3s ease,
+                border-width 0.35s ease,
+                padding 0.35s ease;
+}
+
+/* Custom Space key width */
+.hero-keycaps .keycap.keycap-space {
+    width: 110px;
+}
+
+.hero-keycaps .keycap .key-top {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: var(--keycap-font-size);
+    color: var(--color-text-primary);
+    transform: translateY(-2px);
+    transition: transform 0.15s ease, opacity 0.25s ease;
+}
+
+/* Custom smaller font size for multi-character text keys */
+.hero-keycaps .keycap.keycap-text-only .key-top {
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+
+/* Pause/reset animations when hovering the keycap container */
+.hero-keycaps:hover .keycap,
+.hero-keycaps:hover .keycap .key-top {
+    animation: none !important;
+}
+
+/* Tactile interaction on hover/active */
+.hero-keycaps .keycap:hover {
+    box-shadow: 0 var(--keycap-shadow-down) 0 var(--color-border-mid), 0 4px 6px rgba(0, 0, 0, 0.03);
+    transform: translateY(var(--keycap-translate-down));
+}
+
+.hero-keycaps .keycap:hover .key-top {
+    transform: translateY(0px);
+}
+
+.hero-keycaps .keycap:active {
+    box-shadow: 0 var(--keycap-shadow-active) 0 var(--color-border-mid), 0 1px 2px rgba(0, 0, 0, 0.02);
+    transform: translateY(var(--keycap-translate-active));
+}
+
+.hero-keycaps .keycap:active .key-top {
+    transform: translateY(1px);
+}
+
+/* Collapse styling for the 3rd keycap in 2-key combinations */
+.hero-keycaps .keycap.keycap-hidden {
+    width: 0;
+    margin-left: calc(-1 * var(--keycap-gap));
+    opacity: 0;
+    pointer-events: none;
+    border-width: 0;
+    padding: 0;
+    box-shadow: none;
+}
+
+/* Morph/swap transition styles */
+.hero-keycaps.key-swifting .key-top {
+    opacity: 0;
+    transform: translateY(4px);
+}
+
+/* Automatic Looping Press Animation */
+.hero-keycaps .keycap-1 {
+    animation: hero-press-1 4s infinite ease-in-out;
+}
+.hero-keycaps .keycap-1 .key-top {
+    animation: hero-press-1-top 4s infinite ease-in-out;
+}
+
+.hero-keycaps .keycap-2 {
+    animation: hero-press-2 4s infinite ease-in-out;
+}
+.hero-keycaps .keycap-2 .key-top {
+    animation: hero-press-2-top 4s infinite ease-in-out;
+}
+
+.hero-keycaps .keycap-3 {
+    animation: hero-press-3 4s infinite ease-in-out;
+}
+.hero-keycaps .keycap-3 .key-top {
+    animation: hero-press-3-top 4s infinite ease-in-out;
+}
+
+/* Keycap Press Animations (Sequential Loop: Key 1 -> Key 2 -> Key 3) */
+@keyframes hero-press-1 {
+    0%, 20%, 65%, 100% {
+        box-shadow: 0 var(--keycap-shadow-up) 0 var(--color-border-mid), 0 12px 20px rgba(0, 0, 0, 0.05);
+        transform: translateY(0);
+    }
+    25%, 55% {
+        box-shadow: 0 var(--keycap-shadow-down) 0 var(--color-border-mid), 0 4px 6px rgba(0, 0, 0, 0.03);
+        transform: translateY(var(--keycap-translate-down));
+    }
+}
+@keyframes hero-press-1-top {
+    0%, 20%, 65%, 100% {
+        transform: translateY(-2px);
+    }
+    25%, 55% {
+        transform: translateY(0px);
+    }
+}
+
+@keyframes hero-press-2 {
+    0%, 30%, 65%, 100% {
+        box-shadow: 0 var(--keycap-shadow-up) 0 var(--color-border-mid), 0 12px 20px rgba(0, 0, 0, 0.05);
+        transform: translateY(0);
+    }
+    35%, 55% {
+        box-shadow: 0 var(--keycap-shadow-down) 0 var(--color-border-mid), 0 4px 6px rgba(0, 0, 0, 0.03);
+        transform: translateY(var(--keycap-translate-down));
+    }
+}
+@keyframes hero-press-2-top {
+    0%, 30%, 65%, 100% {
+        transform: translateY(-2px);
+    }
+    35%, 55% {
+        transform: translateY(0px);
+    }
+}
+
+@keyframes hero-press-3 {
+    0%, 40%, 65%, 100% {
+        box-shadow: 0 var(--keycap-shadow-up) 0 var(--color-border-mid), 0 12px 20px rgba(0, 0, 0, 0.05);
+        transform: translateY(0);
+    }
+    45%, 55% {
+        box-shadow: 0 var(--keycap-shadow-down) 0 var(--color-border-mid), 0 4px 6px rgba(0, 0, 0, 0.03);
+        transform: translateY(var(--keycap-translate-down));
+    }
+}
+@keyframes hero-press-3-top {
+    0%, 40%, 65%, 100% {
+        transform: translateY(-2px);
+    }
+    45%, 55% {
+        transform: translateY(0px);
+    }
+}
+
 .hero-title {
     font-family: var(--font-serif);
     font-size: 5.5rem;
@@ -245,7 +432,7 @@ kbd {
     line-height: 1.02;
     letter-spacing: -0.025em;
     color: var(--color-text-primary);
-    margin-bottom: 24px;
+    margin-bottom: 16px;
     max-width: 700px;
 }
 
@@ -256,16 +443,33 @@ kbd {
     line-height: 1.5;
     letter-spacing: -0.1px;
     max-width: 540px;
-    margin-bottom: 48px;
+    margin-bottom: 32px;
 }
 
 .hero-cta-group {
     display: flex;
     gap: 16px;
-    margin-bottom: 80px;
+    margin-bottom: 48px;
 }
 
 @media (max-width: 768px) {
+    .hero-keycaps {
+        --keycap-size: 56px;
+        --keycap-shadow-up: 4px;
+        --keycap-translate-down: 2px;
+        --keycap-translate-active: 4px;
+        --keycap-font-size: 1.3rem;
+        --keycap-border-radius: 10px;
+        --keycap-gap: 12px;
+        --keycap-margin-bottom: 16px;
+        margin-bottom: var(--keycap-margin-bottom);
+    }
+    .hero-keycaps .keycap.keycap-space {
+        width: 85px;
+    }
+    .hero-keycaps .keycap.keycap-text-only .key-top {
+        font-size: 0.8rem;
+    }
     .hero-title {
         font-size: 3.5rem;
     }
