@@ -1353,22 +1353,12 @@ kbd {
         text-align: center;
     }
 }
-
-.footer-credit {
-    text-align: center;
-    font-size: 0.75rem;
-    color: var(--color-text-secondary);
-    margin-top: 20px;
-    padding-top: 16px;
-    border-top: 1px solid var(--color-border-light);
-}
-
-.footer-credit a {
+.credit-link {
     color: var(--color-text-primary);
     font-weight: 500;
     transition: color 0.15s;
 }
 
-.footer-credit a:hover {
+.credit-link:hover {
     color: var(--color-blue-accent);
 }
