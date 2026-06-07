@@ -1354,11 +1354,8 @@ kbd {
     }
 }
 .footer-credit {
-    text-align: center;
-    font-size: 0.78rem;
+    font-size: 0.8rem;
     color: var(--color-text-secondary);
-    margin-top: 24px;
-    opacity: 0.7;
 }
 
 .footer-credit a {
